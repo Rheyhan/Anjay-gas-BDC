@@ -1,5 +1,5 @@
 # Ini untuk BDC
 
-'''{yaml}
+```{yaml}
 Haloo :D
-'''
+```
