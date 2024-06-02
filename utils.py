@@ -4,6 +4,7 @@ import re
 from deep_translator import GoogleTranslator
 from tqdm import tqdm
 from nlp_id.lemmatizer import Lemmatizer 
+import numpy as np
 
 def create_submission(predicted, path = "submission.csv"):
     folder_loc = '/'.join([i for i in path.split("/")][:-1])
@@ -12,8 +13,6 @@ def create_submission(predicted, path = "submission.csv"):
     df = pd.read_excel("Data/Submission_Format.xlsx")
     df["label"] = predicted
     df.to_csv(path, index=False)
-
-
 
 def cleantextv2(list_text, translate = False):
     new_text = []
@@ -71,3 +70,11 @@ def lemarization(list_text):
         text = thelemarization.lemmatize(text)
         new_text.append(text)
     return new_text
+
+class encoder:
+    def __init__(self, list_labels):
+        self.encoder = {}
+        for count, label in enumerate(np.unique(list_labels)):
+            self.encoder[label] = count
+    def encode(self, list_labels):
+        return [self.encoder[label] for label in list_labels]
