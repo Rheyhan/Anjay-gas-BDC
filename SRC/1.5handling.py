@@ -25,12 +25,10 @@ for iter, text_duplicated in enumerate(list(set(temp[temp["text"].duplicated()][
                 print(f'{count + 1}. {i[0]}: {i[1][0]}')
             picked = int(input("pick one "))
             majorval = sorted(majorval, key=lambda x: (x[0] != majorval[picked-1][0], majorval.index(x)))
-            print(majorval)  
         temp1 = []
         for item in majorval:
             temp1.extend(item[1][1:])
-        print(temp1)
-        temp.drop(temp1[1:])
+        temp = temp.drop(temp1[1:])
     except:
         temp = temp.drop(majorval[0][1][2:])
         
